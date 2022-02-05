@@ -7,7 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:chakri_ase/helper/globals.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:intl/intl.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 class JobDetailsPage extends StatefulWidget {
   static const String routeName = '/JobDetailsPage';
@@ -39,7 +38,7 @@ class _JobDetailsPage extends State<JobDetailsPage> {
       gender,
       applicationDeadLine;
 
-  late bool error, showprogress;
+  late bool error, showprogress, responseTypeStatus = false;
 
   late SharedPreferences logindata;
   late bool isUserLoginIn;
@@ -66,6 +65,7 @@ class _JobDetailsPage extends State<JobDetailsPage> {
     age = "";
     gender = "";
     applicationDeadLine = "";
+    responseTypeStatus = false;
 
     Future.delayed(Duration.zero, () {
       setState(() {
@@ -90,18 +90,21 @@ class _JobDetailsPage extends State<JobDetailsPage> {
 
     if (response.statusCode == 200) {
       var jsondata = json.decode(response.body);
-      print(jsondata);
 
       if (jsondata["errorCode"] == 0) {
-        Map<String, dynamic> userMap = jsonDecode(jsondata["response_data"]);
         setState(() {
-          error = false;
+          error = true;
           showprogress = false;
+          errormsg = jsondata["message"];
+          responseTypeStatus = true;
         });
       } else {
-        showprogress = false; //don't show progress indicator
-        error = true;
-        errormsg = jsondata["message"];
+        setState(() {
+          error = true;
+          showprogress = false;
+          errormsg = jsondata["message"];
+          responseTypeStatus = true;
+        });
       }
     } else {
       setState(() {
@@ -121,10 +124,10 @@ class _JobDetailsPage extends State<JobDetailsPage> {
     }
   }
 
-  void _getUserInfo(String JobId) async {
+  void _getUserInfo(String jobId) async {
     String apiurl = apiBaseUrl + "job_list.php"; //api url
 
-    var response = await http.post(Uri.parse(apiurl), body: {'JobId': JobId, 'action': 'get_job_details'});
+    var response = await http.post(Uri.parse(apiurl), body: {'JobId': jobId, 'action': 'get_job_details'});
 
     if (response.statusCode == 200) {
       var jsondata = json.decode(response.body);
@@ -174,6 +177,14 @@ class _JobDetailsPage extends State<JobDetailsPage> {
       drawer: MemberNavigationDrawer(),
       body: SingleChildScrollView(
           child: Column(children: <Widget>[
+        Container(
+          //show error message here
+          margin: EdgeInsets.only(top: 0),
+          padding: EdgeInsets.all(10),
+          child: error ? showMessage(errormsg, responseTypeStatus) : Container(),
+          //if error == true then show error message
+          //else set empty container as child
+        ),
         Html(data: "<h2>" + position + "</h2><h3>" + company + "</h3>", style: {
           "h2": Style(
             backgroundColor: Color(0xFFfff),
@@ -226,7 +237,7 @@ class _JobDetailsPage extends State<JobDetailsPage> {
           onPressed: () {
             applyJob();
           },
-          child: Text('Job Apply'),
+          child: Text('Apply This Job'),
         ),
         Html(
           data: "&nbsp;",

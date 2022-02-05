@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -48,9 +47,11 @@ class _RegisterPage extends State<RegisterPage> {
           responseTypeStatus = true;
         });
       } else {
-        showprogress = false; //don't show progress indicator
-        error = true;
-        errormsg = jsondata["message"];
+        setState(() {
+          showprogress = false; //don't show progress indicator
+          error = false;
+          errormsg = jsondata["message"];
+        });
       }
     } else {
       setState(() {

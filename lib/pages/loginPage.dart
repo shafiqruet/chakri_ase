@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -33,11 +32,7 @@ class _LoginPage extends State<LoginPage> {
   Future<void> startLogin() async {
     String apiurl = apiBaseUrl + "login.php"; //api url
 
-    var response = await http.post(Uri.parse(apiurl), body: {
-      'phone': phone,
-      'password': password,
-      'token_value': tokenValue
-    });
+    var response = await http.post(Uri.parse(apiurl), body: {'phone': phone, 'password': password, 'token_value': tokenValue});
 
     if (response.statusCode == 200) {
       var jsondata = json.decode(response.body);
@@ -71,9 +66,11 @@ class _LoginPage extends State<LoginPage> {
           //print(fullname);
           //user shared preference to save data
         } else {
-          showprogress = false; //don't show progress indicator
-          error = true;
-          errormsg = "Something went wrong.";
+          setState(() {
+            showprogress = false; //don't show progress indicator
+            error = false;
+            errormsg = jsondata["message"];
+          });
         }
       }
     } else {
@@ -104,16 +101,14 @@ class _LoginPage extends State<LoginPage> {
     logindata = await SharedPreferences.getInstance();
     isUserLoginIn = logindata.getBool('isLoggedIn')!;
     if (isUserLoginIn == true) {
-      Navigator.pushReplacement(context,
-          new MaterialPageRoute(builder: (context) => DashboardPage()));
+      Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => DashboardPage()));
     }
   }
 
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent
-            //color set to transperent or set your own color
-            ));
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent
+        //color set to transperent or set your own color
+        ));
 
     return Scaffold(
       appBar: AppBar(
@@ -122,10 +117,9 @@ class _LoginPage extends State<LoginPage> {
       drawer: HomeNavigationDrawer(),
       body: SingleChildScrollView(
           child: Container(
-        constraints:
-            BoxConstraints(minHeight: MediaQuery.of(context).size.height
-                //set minimum height equal to 100% of VH
-                ),
+        constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height
+            //set minimum height equal to 100% of VH
+            ),
         width: MediaQuery.of(context).size.width,
         //make width of outer wrapper to 100%
         decoration: BoxDecoration(
@@ -160,8 +154,7 @@ class _LoginPage extends State<LoginPage> {
             //show error message here
             margin: EdgeInsets.only(top: 20),
             padding: EdgeInsets.all(10),
-            child:
-                error ? showMessage(errormsg, responseTypeStatus) : Container(),
+            child: error ? showMessage(errormsg, responseTypeStatus) : Container(),
             //if error == true then show error message
             //else set empty container as child
           ),
@@ -205,8 +198,7 @@ class _LoginPage extends State<LoginPage> {
                 style: TextButton.styleFrom(
                     primary: Colors.black,
                     padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
-                    textStyle: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold),
+                    textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     backgroundColor: Color(0xFFA56E57)),
                 onPressed: () {
                   setState(() {
@@ -221,8 +213,7 @@ class _LoginPage extends State<LoginPage> {
                         width: 30,
                         child: CircularProgressIndicator(
                           backgroundColor: Color(0xFFFFFFFF),
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                              Colors.deepOrangeAccent),
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.deepOrangeAccent),
                         ),
                       )
                     : Text(

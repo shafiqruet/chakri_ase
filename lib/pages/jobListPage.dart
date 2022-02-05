@@ -1,8 +1,6 @@
-import 'package:chakri_ase/pages/jobDetailsPage.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:chakri_ase/helper/globals.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:chakri_ase/navigationDrawer/memberNavigationDrawer.dart';
 import 'package:flutter_html/flutter_html.dart';
 
@@ -58,19 +56,19 @@ class _JobListPage extends State<JobListPage> {
           return _buildProgressIndicator();
         } else {
           return Container(
-            padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-            margin: EdgeInsets.fromLTRB(5, 5, 5, 5),
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+            margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
             child: new ListTile(
               title: Html(
                 data: "<h3>" +
                     users[index]['position'] +
                     "</h3>" +
-                    "<p><b>" +
+                    "<span><b>" +
                     users[index]['company'] +
-                    "</b></p>" +
-                    "<p>" +
+                    "</span>" +
+                    "<span>, " +
                     users[index]['location'] +
-                    "</p>" +
+                    "</span></b>" +
                     "<p>" +
                     users[index]['educational_requirements'] +
                     "</p>",

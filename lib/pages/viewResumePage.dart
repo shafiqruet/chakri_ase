@@ -58,6 +58,7 @@ class _ViewResumePage extends State<ViewResumePage> {
     experience2 = "";
     experience3 = "";
     jobPosition = "";
+    jobType = "";
     skill1 = "";
     skill2 = "";
     skill3 = "";

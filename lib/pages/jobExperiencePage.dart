@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'package:chakri_ase/navigationDrawer/memberNavigationDrawer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:chakri_ase/pages/dashboardPage.dart';
 import 'package:chakri_ase/helper/globals.dart';
 
 class JobExperiencePage extends StatefulWidget {
@@ -128,9 +126,11 @@ class _JobExperiencePage extends State<JobExperiencePage> {
           actionText = 'Update';
         });
       } else {
-        showprogress = false; //don't show progress indicator
-        error = false;
-        errormsg = jsondata["message"];
+        setState(() {
+          showprogress = false; //don't show progress indicator
+          error = false;
+          errormsg = jsondata["message"];
+        });
       }
     } else {
       setState(() {

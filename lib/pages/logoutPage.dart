@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:chakri_ase/pages/homePage.dart';
@@ -45,10 +44,9 @@ class _LogoutPage extends State<LogoutPage> {
   }
 
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(statusBarColor: Colors.transparent
-            //color set to transperent or set your own color
-            ));
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: Colors.transparent
+        //color set to transperent or set your own color
+        ));
 
     return Scaffold(
       appBar: AppBar(
@@ -57,10 +55,9 @@ class _LogoutPage extends State<LogoutPage> {
       drawer: MemberNavigationDrawer(),
       body: SingleChildScrollView(
           child: Container(
-        constraints:
-            BoxConstraints(minHeight: MediaQuery.of(context).size.height
-                //set minimum height equal to 100% of VH
-                ),
+        constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height
+            //set minimum height equal to 100% of VH
+            ),
         width: MediaQuery.of(context).size.width,
         //make width of outer wrapper to 100%
         decoration: BoxDecoration(
@@ -95,8 +92,7 @@ class _LogoutPage extends State<LogoutPage> {
             //show error message here
             margin: EdgeInsets.only(top: 20),
             padding: EdgeInsets.all(10),
-            child:
-                error ? showMessage(errormsg, responseTypeStatus) : Container(),
+            child: error ? showMessage(errormsg, responseTypeStatus) : Container(),
             //if error == true then show error message
             //else set empty container as child
           ),
@@ -108,8 +104,7 @@ class _LogoutPage extends State<LogoutPage> {
                 style: TextButton.styleFrom(
                     primary: Colors.black,
                     padding: EdgeInsets.fromLTRB(25, 10, 25, 10),
-                    textStyle: const TextStyle(
-                        fontSize: 20, fontWeight: FontWeight.bold),
+                    textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     backgroundColor: Color(0xFFA56E57)),
                 onPressed: () {
                   setState(() {
@@ -124,8 +119,7 @@ class _LogoutPage extends State<LogoutPage> {
                         width: 30,
                         child: CircularProgressIndicator(
                           backgroundColor: Color(0xFFFFFFFF),
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                              Colors.deepOrangeAccent),
+                          valueColor: AlwaysStoppedAnimation<Color>(Colors.deepOrangeAccent),
                         ),
                       )
                     : Text(
