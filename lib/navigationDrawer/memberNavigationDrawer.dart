@@ -23,9 +23,14 @@ class _MemberNavigatePage extends State<MemberNavigationDrawer> {
 
   void checkIfAlreadyLogin() async {
     logindata = await SharedPreferences.getInstance();
-    print(logindata);
-    isUserLoginIn = logindata.getBool('isLoggedIn')!;
-    print(isUserLoginIn);
+    //print(logindata);
+    //isUserLoginIn = logindata.getBool('isLoggedIn')!;
+    if (logindata.getBool('isLoggedIn') != null) {
+      isUserLoginIn = true;
+    } else {
+      isUserLoginIn = false;
+    }
+    //print(isUserLoginIn);
     if (isUserLoginIn == false) {
       Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => HomePage()));
     }

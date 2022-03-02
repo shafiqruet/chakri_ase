@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:chakri_ase/helper/globals.dart';
 import 'package:chakri_ase/navigationDrawer/memberNavigationDrawer.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:http/http.dart' as http;
 
 class JobListPage extends StatefulWidget {
   static const String routeName = '/JobListPage';
@@ -100,11 +103,11 @@ class _JobListPage extends State<JobListPage> {
         isLoading = true;
       });
       var url = apiBaseUrl + "job_list.php?page=" + index.toString() + "&results=10&action=get_job_lists";
-      final response = await dio.get(url);
-      //print(response.data['response_data']);
+      var response = await http.get(Uri.parse(url));
+      var jsondata = json.decode(response.body);
       List tList = [];
-      for (int i = 0; i < response.data['response_data'].length; i++) {
-        tList.add(response.data['response_data'][i]);
+      for (int i = 0; i < jsondata['response_data'].length; i++) {
+        tList.add(jsondata['response_data'][i]);
       }
 
       setState(() {

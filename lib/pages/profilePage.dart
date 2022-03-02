@@ -39,7 +39,12 @@ class _ProfilePage extends State<ProfilePage> {
 
   void checkIfAlreadyLogin() async {
     logindata = await SharedPreferences.getInstance();
-    isUserLoginIn = logindata.getBool('isLoggedIn')!;
+    //isUserLoginIn = logindata.getBool('isLoggedIn')!;
+    if (logindata.getBool('isLoggedIn') != null) {
+      isUserLoginIn = true;
+    } else {
+      isUserLoginIn = false;
+    }
 
     if (isUserLoginIn == false) {
       Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => HomePage()));

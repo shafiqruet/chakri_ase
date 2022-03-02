@@ -99,7 +99,12 @@ class _LoginPage extends State<LoginPage> {
 
   void checkIfAlreadyLogin() async {
     logindata = await SharedPreferences.getInstance();
-    isUserLoginIn = logindata.getBool('isLoggedIn')!;
+    //isUserLoginIn = logindata.getBool('isLoggedIn')!;
+    if (logindata.getBool('isLoggedIn') != null) {
+      isUserLoginIn = true;
+    } else {
+      isUserLoginIn = false;
+    }
     if (isUserLoginIn == true) {
       Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => DashboardPage()));
     }

@@ -117,7 +117,12 @@ class _JobDetailsPage extends State<JobDetailsPage> {
 
   void checkIfAlreadyLogin() async {
     logindata = await SharedPreferences.getInstance();
-    isUserLoginIn = logindata.getBool('isLoggedIn')!;
+    //isUserLoginIn = logindata.getBool('isLoggedIn')!;
+    if (logindata.getBool('isLoggedIn') != null) {
+      isUserLoginIn = true;
+    } else {
+      isUserLoginIn = false;
+    }
 
     if (isUserLoginIn == false) {
       Navigator.pushReplacement(context, new MaterialPageRoute(builder: (context) => HomePage()));
@@ -185,19 +190,27 @@ class _JobDetailsPage extends State<JobDetailsPage> {
           //if error == true then show error message
           //else set empty container as child
         ),
-        Html(data: "<h2>" + position + "</h2><h3>" + company + "</h3>", style: {
-          "h2": Style(
-            backgroundColor: Color(0xFFfff),
-          )
+        Html(data: "<b>Job Position: </b>" + position + "<br><br><b>Company Name: </b> " + company, style: {
+          // some other granular customizations are also possible
+          "b": Style(padding: EdgeInsets.fromLTRB(5, 2, 5, 2), margin: EdgeInsets.fromLTRB(0, 10, 0, 10)),
+          "h2": Style(),
         }),
         Html(
           data: "<b>Vacancy: </b>" + vacancy,
         ),
-        Html(
-          data: "<b>Job Responsibilites :</b><br><div>" +
-              responsibilities +
-              "</div>", /* style: {"div": Style(fontFamily: 'RaleWay', padding: EdgeInsets.fromLTRB(0, 5, 0, 5), border: Border.all(color: Colors.blueAccent))} */
-        ),
+        Html(data: "<b>Job Responsibilites:</b><br><div>" + responsibilities + "</div>", style: {
+          "li": Style(
+            padding: EdgeInsets.fromLTRB(5, 2, 5, 2),
+          ),
+          "div": Style(
+              border: Border.all(
+                color: Color.fromARGB(251, 114, 113, 113),
+                width: 1,
+              ),
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+              margin: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+        } /* style: {"div": Style(fontFamily: 'RaleWay', padding: EdgeInsets.fromLTRB(0, 5, 0, 5), border: Border.all(color: Colors.blueAccent))} */
+            ),
         Html(
           data: "<b>Employment Status: </b>" + employmentStatus,
         ),
@@ -205,23 +218,41 @@ class _JobDetailsPage extends State<JobDetailsPage> {
           data: "<b>Workplace: </b>" + workplace,
         ),
         Html(
-          data: "<b>Educational Requirements </b><br>" + educationalRequirements,
+          data: "<b>Educational Requirements: </b><br>" + educationalRequirements,
         ),
         Html(
-          data: "<b>Experience Requirements </b><br>" + experienceRequirements,
+          data: "<b>Experience Requirements: </b><br>" + experienceRequirements,
         ),
-        Html(
-          data: "<b>Additional Requirements </b><br>" + additionalRequirements,
-        ),
+        Html(data: "<b>Additional Requirements: </b><br><div>" + additionalRequirements + "</div>", style: {
+          "li": Style(
+            padding: EdgeInsets.fromLTRB(5, 2, 5, 2),
+          ),
+          "div": Style(
+              border: Border.all(
+                color: Color.fromARGB(251, 114, 113, 113),
+                width: 1,
+              ),
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+              margin: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+        }),
         Html(
           data: "<b>Job Location: </b>" + location,
         ),
         Html(
-          data: "<b>Salary </b><br>" + salary,
+          data: "<b>Salary: </b><br>" + salary,
         ),
-        Html(
-          data: "<b>Compensation & Other Benefits </b><br>" + benefits,
-        ),
+        Html(data: "<b>Compensation & Other Benefits: </b><br><div>" + benefits + "</div>", style: {
+          "li": Style(
+            padding: EdgeInsets.fromLTRB(5, 2, 5, 2),
+          ),
+          "div": Style(
+              border: Border.all(
+                color: Color.fromARGB(251, 114, 113, 113),
+                width: 1,
+              ),
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+              margin: EdgeInsets.fromLTRB(0, 10, 0, 0)),
+        }),
         Html(
           data: "<b>Application Deadline: </b>" + applicationDeadLine,
         ),

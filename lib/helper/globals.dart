@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-String apiBaseUrl = "http://192.168.0.104/chakri_ase_api/";
+//String apiBaseUrl = "http://192.168.0.104/chakri_ase_api/";
+String apiBaseUrl = "https://www.leadrcorp.com/chakri_ase_api/";
 
 InputDecoration myInputDecoration({String? label, IconData? icon}) {
   return InputDecoration(
