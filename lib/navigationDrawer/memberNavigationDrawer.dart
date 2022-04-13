@@ -63,6 +63,11 @@ class _MemberNavigatePage extends State<MemberNavigationDrawer> {
             text: 'Job Lists',
             onTap: () => Navigator.pushReplacementNamed(context, PageRoutes.jobList),
           ),
+          createDrawerBodyItem(
+            icon: Icons.manage_accounts_rounded,
+            text: 'Add Job',
+            onTap: () => Navigator.pushReplacementNamed(context, PageRoutes.addJob),
+          ),
           ExpansionTile(
             title: Row(
               children: <Widget>[

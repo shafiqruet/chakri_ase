@@ -1,3 +1,4 @@
+import 'package:chakri_ase/pages/addJobPage.dart';
 import 'package:chakri_ase/pages/editProfilePage.dart';
 import 'package:chakri_ase/pages/jobDetailsPage.dart';
 import 'package:chakri_ase/pages/jobListPage.dart';
@@ -42,6 +43,7 @@ class _MyAppState extends State<MyApp> {
         PageRoutes.jobList: (context) => JobListPage(),
         "/jobDetails": (context) => JobDetailsPage(),
         PageRoutes.viewResume: (context) => ViewResumePage(),
+        PageRoutes.addJob: (context) => AddJobPage(),
       },
     );
   }

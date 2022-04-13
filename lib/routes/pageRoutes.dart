@@ -11,6 +11,7 @@ import 'package:chakri_ase/pages/jobExperiencePage.dart';
 import 'package:chakri_ase/pages/jobListPage.dart';
 import 'package:chakri_ase/pages/jobSkillsPage.dart';
 import 'package:chakri_ase/pages/viewResumePage.dart';
+import 'package:chakri_ase/pages/addJobPage.dart';
 
 class PageRoutes {
   static const String home = HomePage.routeName;
@@ -26,4 +27,5 @@ class PageRoutes {
   static const String jobSkills = JobSkillsPage.routeName;
   static const String jobDetails = JobDetailsPage.routeName;
   static const String viewResume = ViewResumePage.routeName;
+  static const String addJob = AddJobPage.routeName;
 }
